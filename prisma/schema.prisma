@@ -6,12 +6,17 @@ generator client {
 }
 
 datasource db {
-    provider = "sqlite"
+    provider  = "postgresql" // "sqlite"
     // NOTE: When using mysql or sqlserver, uncomment the @db.Text annotations in model Account below
     // Further reading:
     // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
     // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
-    url      = env("DATABASE_URL")
+    url       = env("DATABASE_URL")
+    directUrl = env("DIRECT_URL")
+    // If you want to use Prisma Migrate, you will need to manually create a shadow database
+    // https://neon.tech/docs/guides/prisma-migrate#configure-a-shadow-database-for-prisma-migrate
+    // make sure to append ?connect_timeout=10 to the connection string
+    // shadowDatabaseUrl = env(“SHADOW_DATABASE_URL”)
 }
 
 model Example {
