@@ -70,9 +70,9 @@ export const authOptions: NextAuthOptions = {
         // const uniqId = uid() as string;
 
         await emailClient.emails.send({
-          from: "SmPoster <no-reply@smposter.to>",
+          from: "CronDeck <no-reply@crondeck.to>",
           to: [email],
-          subject: "Welcome To SMPoster",
+          subject: "Welcome To CronDeck",
           react: EmailTemplate({ firstName: "John" }),
           text: `Sign in to ${host}\n${url}\n\n`,
           // headers: { "X-Entity-Ref-ID": uniqId },
