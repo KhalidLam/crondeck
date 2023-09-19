@@ -17,6 +17,15 @@ const config = {
     locales: ["en"],
     defaultLocale: "en",
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+        // hostname: "**.fbsbx.com",
+      },
+    ],
+  },
 };
 
 export default config;

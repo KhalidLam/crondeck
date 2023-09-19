@@ -6,14 +6,10 @@ import {
   type NextAuthOptions,
 } from "next-auth";
 
-import EmailProvider from "next-auth/providers/email";
-// import { uid } from "uid";
+import FacebookProvider from "next-auth/providers/facebook";
 
 import { env } from "@/env.mjs";
 import { db } from "@/server/db";
-
-import emailClient from "@/lib/email-client";
-import { EmailTemplate } from "@/components/email-template";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -62,22 +58,9 @@ export const authOptions: NextAuthOptions = {
      *
      * @see https://next-auth.js.org/providers/github
      */
-    EmailProvider({
-      // id: "email",
-      sendVerificationRequest: async function ({ identifier: email, url }) {
-        const { host } = new URL(url);
-
-        // const uniqId = uid() as string;
-
-        await emailClient.emails.send({
-          from: "CronDeck <no-reply@crondeck.to>",
-          to: [email],
-          subject: "Welcome To CronDeck",
-          react: EmailTemplate({ firstName: "John" }),
-          text: `Sign in to ${host}\n${url}\n\n`,
-          // headers: { "X-Entity-Ref-ID": uniqId },
-        });
-      },
+    FacebookProvider({
+      clientId: env.FACEBOOK_CLIENT_ID,
+      clientSecret: env.FACEBOOK_CLIENT_SECRET,
     }),
   ],
   // pages: {
