@@ -1,5 +1,5 @@
-// import LayoutFooter from "./footer";
-// import LayoutHeader from "./header";
+import LayoutFooter from "./footer";
+import LayoutHeader from "./header";
 
 interface MainLayoutI {
   children: React.ReactNode;
@@ -8,9 +8,9 @@ interface MainLayoutI {
 export default function MainLayout({ children }: MainLayoutI) {
   return (
     <div className="flex min-h-screen flex-col bg-gray-50">
-      {/* <LayoutHeader /> */}
+      <LayoutHeader />
       <main className="flex-1">{children}</main>
-      {/* <LayoutFooter /> */}
+      <LayoutFooter />
     </div>
   );
 }

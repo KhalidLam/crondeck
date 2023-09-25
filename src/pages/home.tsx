@@ -1,17 +1,13 @@
 import Head from "next/head";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
+import MainLayout from "@/components/layouts/main-layout";
+import AuthLayout from "@/components/layouts/auth-layout";
+import type { ReactElement } from "react";
+import type { NextPageWithLayout } from "./_app";
 
-export default function Home() {
-  const { data: session, status } = useSession();
-
-  if (status === "loading") {
-    return <p>Loading...</p>;
-  }
-
-  if (status === "unauthenticated") {
-    return <p>Please Sign in</p>;
-  }
+const HomePage: NextPageWithLayout = () => {
+  const { data: session } = useSession();
 
   if (!session) {
     return <p>Something went wrong</p>;
@@ -39,4 +35,14 @@ export default function Home() {
       </main>
     </div>
   );
-}
+};
+
+HomePage.getLayout = (page: ReactElement) => {
+  return (
+    <AuthLayout>
+      <MainLayout>{page}</MainLayout>
+    </AuthLayout>
+  );
+};
+
+export default HomePage;
