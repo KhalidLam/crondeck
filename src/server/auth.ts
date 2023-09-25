@@ -63,11 +63,13 @@ export const authOptions: NextAuthOptions = {
       clientSecret: env.FACEBOOK_CLIENT_SECRET,
     }),
   ],
-  // pages: {
-  //   signIn: "/auth/login",
-  //   verifyRequest: "/auth/verify-email",
-  //   error: "/auth/error",
-  // },
+  pages: {
+    signIn: "/login",
+    // verifyRequest: '/auth/verify-request', // (used for check email message)
+    // signOut: '/auth/signout',
+    // error: '/auth/error', // Error code passed in query string as ?error=
+    // newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
+  },
   // events: {
   //   createUser(message) {
   //     const params = {
