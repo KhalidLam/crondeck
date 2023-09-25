@@ -1,15 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import Image from "next/image";
+import { signIn } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 
-import type { ReactElement } from "react";
-import type { NextPageWithLayout } from "./_app";
-import MainLayout from "@/components/layouts/main-layout";
 import { ReloadIcon } from "@radix-ui/react-icons";
-import { signIn } from "next-auth/react";
 
-const LoginPage: NextPageWithLayout = () => {
+const LoginPage = () => {
+  // TODO: handle cases user is already login => redirect
+
   return (
     <div className="flex min-h-screen items-center justify-center">
       <div className="flex flex-col items-center justify-center rounded-md bg-white px-6 py-12 shadow-md ring-1 ring-slate-200">
@@ -43,10 +42,6 @@ const LoginPage: NextPageWithLayout = () => {
       </div>
     </div>
   );
-};
-
-LoginPage.getLayout = function getLayout(page: ReactElement) {
-  return <MainLayout>{page}</MainLayout>;
 };
 
 export default LoginPage;
