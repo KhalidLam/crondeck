@@ -52,7 +52,9 @@ const SocialMediaLogin = () => {
 
   const login = (providerId: string) => {
     setIsLoading(true);
-    void signIn(providerId);
+    void signIn(providerId, {
+      callbackUrl: "/home",
+    });
     setIsLoading(false);
   };
 
