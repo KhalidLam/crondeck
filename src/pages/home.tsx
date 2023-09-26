@@ -1,15 +1,19 @@
 import Head from "next/head";
 import Image from "next/image";
-import { useSession } from "next-auth/react";
-import MainLayout from "@/components/layouts/main-layout";
-import AuthLayout from "@/components/layouts/auth-layout";
+
 import type { ReactElement } from "react";
 import type { NextPageWithLayout } from "./_app";
 
-const HomePage: NextPageWithLayout = () => {
-  const { data: session } = useSession();
+import MainLayout from "@/components/layouts/main-layout";
+import AuthLayout from "@/components/layouts/auth-layout";
+import { Button } from "@/components/ui/button";
 
-  if (!session) {
+import { useSession, signOut } from "next-auth/react";
+
+const HomePage: NextPageWithLayout = () => {
+  const { data: sessionData } = useSession();
+
+  if (!sessionData) {
     return <p>Something went wrong</p>;
   }
 
@@ -22,16 +26,21 @@ const HomePage: NextPageWithLayout = () => {
       <main>
         <div>
           <p>
-            Welcome, {session.user.name} <span>{session.user.email}</span>
+            Welcome, {sessionData.user.name}{" "}
+            <span>{sessionData.user.email}</span>
           </p>
           <br />
           <Image
-            src={session.user.image!}
+            src={sessionData.user.image!}
             alt="profile picture"
             width={40}
             height={40}
           />
         </div>
+
+        <Button className="mt-8" onClick={() => void signOut()}>
+          Sign out
+        </Button>
       </main>
     </div>
   );

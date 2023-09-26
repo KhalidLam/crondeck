@@ -33,6 +33,10 @@ export const env = createEnv({
     // DISCORD_CLIENT_SECRET: z.string(),
     FACEBOOK_CLIENT_ID: z.string().min(1),
     FACEBOOK_CLIENT_SECRET: z.string().min(1),
+    LINKEDIN_CLIENT_ID: z.string().min(1),
+    LINKEDIN_CLIENT_SECRET: z.string().min(1),
+    INSTAGRAM_CLIENT_ID: z.string().min(1),
+    INSTAGRAM_CLIENT_SECRET: z.string().min(1),
   },
 
   /**
@@ -55,6 +59,10 @@ export const env = createEnv({
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     FACEBOOK_CLIENT_ID: process.env.FACEBOOK_CLIENT_ID,
     FACEBOOK_CLIENT_SECRET: process.env.FACEBOOK_CLIENT_SECRET,
+    LINKEDIN_CLIENT_ID: process.env.LINKEDIN_CLIENT_ID,
+    LINKEDIN_CLIENT_SECRET: process.env.LINKEDIN_CLIENT_SECRET,
+    INSTAGRAM_CLIENT_ID: process.env.INSTAGRAM_CLIENT_ID,
+    INSTAGRAM_CLIENT_SECRET: process.env.INSTAGRAM_CLIENT_SECRET,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

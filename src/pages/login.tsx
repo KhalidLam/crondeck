@@ -5,6 +5,7 @@ import { signIn } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 
 import { ReloadIcon } from "@radix-ui/react-icons";
+import { useState } from "react";
 
 const LoginPage = () => {
   // TODO: handle cases user is already login => redirect
@@ -47,19 +48,25 @@ const LoginPage = () => {
 export default LoginPage;
 
 const SocialMediaLogin = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const login = (providerId: string) => {
+    setIsLoading(true);
+    void signIn(providerId);
+    setIsLoading(false);
+  };
+
   return (
     <div className="grid gap-3">
       <Button
         variant="outline"
         type="button"
         disabled={false}
-        onClick={() =>
-          void signIn("facebook", {
-            callbackUrl: `/home`,
-          })
-        }
+        onClick={() => {
+          login("facebook");
+        }}
       >
-        {false ? (
+        {isLoading ? (
           <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
         ) : (
           <>
@@ -72,7 +79,14 @@ const SocialMediaLogin = () => {
           </>
         )}{" "}
       </Button>
-      <Button variant="outline" type="button" disabled={true}>
+      <Button
+        variant="outline"
+        type="button"
+        disabled={false}
+        onClick={() => {
+          login("instagram");
+        }}
+      >
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/9/95/Instagram_logo_2022.svg"
           className="mr-2 h-4 w-4"
@@ -80,7 +94,12 @@ const SocialMediaLogin = () => {
         />
         Instagram
       </Button>
-      <Button variant="outline" type="button" disabled={true}>
+      <Button
+        variant="outline"
+        type="button"
+        disabled={false}
+        onClick={() => login("linkedin")}
+      >
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/8/81/LinkedIn_icon.svg"
           className="mr-2 h-4 w-4"

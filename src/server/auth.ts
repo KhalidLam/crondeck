@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { type GetServerSidePropsContext } from "next";
 import {
@@ -7,6 +8,8 @@ import {
 } from "next-auth";
 
 import FacebookProvider from "next-auth/providers/facebook";
+import LinkedInProvider from "next-auth/providers/linkedin";
+import InstagramProvider from "next-auth/providers/instagram";
 
 import { env } from "@/env.mjs";
 import { db } from "@/server/db";
@@ -59,8 +62,56 @@ export const authOptions: NextAuthOptions = {
      * @see https://next-auth.js.org/providers/github
      */
     FacebookProvider({
+      name: "facebook",
       clientId: env.FACEBOOK_CLIENT_ID,
       clientSecret: env.FACEBOOK_CLIENT_SECRET,
+    }),
+    InstagramProvider({
+      clientId: env.INSTAGRAM_CLIENT_ID,
+      clientSecret: env.INSTAGRAM_CLIENT_SECRET,
+      // token: {
+      //   url: "https://api.instagram.com/oauth/access_token",
+      //   async request(context: {
+      //     provider: {
+      //       clientId: string;
+      //       clientSecret: string;
+      //       callbackUrl: string;
+      //       token: { url: string };
+      //     };
+      //     params: { code: string };
+      //   }) {
+      //     const {
+      //       provider,
+      //       params: { code },
+      //     } = context;
+
+      //     const body = new URLSearchParams([
+      //       ["grant_type", "authorization_code"],
+      //       ["code", code],
+      //       ["client_id", provider.clientId],
+      //       ["client_secret", provider.clientSecret],
+      //       ["redirect_uri", provider.callbackUrl],
+      //     ]);
+      //     const response = await (
+      //       await fetch(provider.token.url, {
+      //         method: "POST",
+      //         body,
+      //       })
+      //     ).json();
+      //     const { access_token } = response;
+      //     return { tokens: { access_token } };
+      //   },
+      // },
+    }),
+    LinkedInProvider({
+      name: "linkedin",
+      clientId: env.LINKEDIN_CLIENT_ID,
+      clientSecret: env.LINKEDIN_CLIENT_SECRET,
+      authorization: {
+        params: {
+          scope: "openid profile email",
+        },
+      },
     }),
   ],
   pages: {
