@@ -1,14 +1,28 @@
 /* eslint-disable @next/next/no-img-element */
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { signIn } from "next-auth/react";
-import { Button } from "@/components/ui/button";
-
+import { signIn, useSession } from "next-auth/react";
 import { ReloadIcon } from "@radix-ui/react-icons";
-import { useState } from "react";
+
+import { Button } from "@/components/ui/button";
+import RedirectComponent from "@/components/redirect-component";
+import LoadingComponent from "@/components/loading-component";
 
 const LoginPage = () => {
-  // TODO: handle cases user is already login => redirect
+  const { status } = useSession();
+
+  if (status === "loading") {
+    return (
+      <div className="flex min-h-screen w-full items-center justify-center text-center">
+        <LoadingComponent />
+      </div>
+    );
+  }
+
+  if (status === "authenticated") {
+    return <RedirectComponent to="/home" />;
+  }
 
   return (
     <div className="flex min-h-screen items-center justify-center">
@@ -84,7 +98,7 @@ const SocialMediaLogin = () => {
       <Button
         variant="outline"
         type="button"
-        disabled={false}
+        disabled={true}
         onClick={() => {
           login("instagram");
         }}
@@ -99,7 +113,7 @@ const SocialMediaLogin = () => {
       <Button
         variant="outline"
         type="button"
-        disabled={false}
+        disabled={true}
         onClick={() => login("linkedin")}
       >
         <img
