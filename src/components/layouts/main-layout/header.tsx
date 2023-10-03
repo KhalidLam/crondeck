@@ -1,8 +1,13 @@
+import Image from "next/image";
+
 export default function LayoutHeader() {
-  // TODO
   return (
-    <header className="flex h-8 items-center border-b px-4 py-3">
-      <p className="text-slate-700">This is the site header</p>
+    <header className="flex max-w-7xl items-center border-b px-4 py-4 md:px-6">
+      <Image src="/crondeck_logo.svg" height={24} width={140} alt="logo" />
+
+      <div className="ml-auto">
+        <p className="text-sm text-slate-700">Khalid Lam</p>
+      </div>
     </header>
   );
 }

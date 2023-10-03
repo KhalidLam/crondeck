@@ -1,8 +1,7 @@
 export default function LayoutFooter() {
-  // TODO
   return (
-    <footer className="flex h-8 items-center px-4 py-3">
-      <p className="text-slate-700">This is the site footer</p>
+    <footer className="flex max-w-7xl items-center border-t px-4 py-4 md:px-6">
+      <p className="text-sm text-slate-700">Footer</p>
     </footer>
   );
 }

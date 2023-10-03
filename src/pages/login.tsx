@@ -28,14 +28,14 @@ const LoginPage = () => {
     <div className="flex min-h-screen items-center justify-center">
       <div className="flex flex-col items-center justify-center rounded-md bg-white px-6 py-12 shadow-md ring-1 ring-slate-200">
         <Image
-          src="/crondeck_logo.svg"
-          height={40}
-          width={40}
+          src="/crondeck_2.svg"
+          height={120}
+          width={120}
           alt="logo"
           className="block"
         />
 
-        <div className="mx-auto mt-8 flex flex-col justify-center space-y-6 sm:w-[350px]">
+        <div className="mx-auto mt-10 flex flex-col justify-center space-y-6 sm:w-[350px]">
           <h2 className="text-center text-2xl font-semibold text-gray-900">
             Sign in to your account
           </h2>

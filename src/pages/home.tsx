@@ -18,12 +18,13 @@ const HomePage: NextPageWithLayout = () => {
   }
 
   return (
-    <div>
+    <>
       <Head>
-        <title>Nextjs | Next-Auth</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Home Page</title>
+        <meta name="description" content="Home page" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </Head>
-      <main>
+      <div className="flex flex-col">
         <div>
           <p>
             Welcome, {sessionData.user.name}{" "}
@@ -38,11 +39,13 @@ const HomePage: NextPageWithLayout = () => {
           />
         </div>
 
-        <Button className="mt-8" onClick={() => void signOut()}>
-          Sign out
-        </Button>
-      </main>
-    </div>
+        <div>
+          <Button className="mt-8" onClick={() => void signOut()}>
+            Sign out
+          </Button>
+        </div>
+      </div>
+    </>
   );
 };
 
