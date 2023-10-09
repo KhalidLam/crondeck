@@ -2,10 +2,9 @@ import Head from "next/head";
 import Image from "next/image";
 
 import type { ReactElement } from "react";
-import type { NextPageWithLayout } from "./_app";
+import type { NextPageWithLayout } from "../_app";
 
 import MainLayout from "@/components/layouts/main-layout";
-import AuthLayout from "@/components/layouts/auth-layout";
 import { Button } from "@/components/ui/button";
 
 import { useSession, signOut } from "next-auth/react";
@@ -50,11 +49,7 @@ const HomePage: NextPageWithLayout = () => {
 };
 
 HomePage.getLayout = (page: ReactElement) => {
-  return (
-    <AuthLayout>
-      <MainLayout>{page}</MainLayout>
-    </AuthLayout>
-  );
+  return <MainLayout>{page}</MainLayout>;
 };
 
 export default HomePage;

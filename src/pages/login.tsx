@@ -6,7 +6,6 @@ import { signIn, useSession } from "next-auth/react";
 import { ReloadIcon } from "@radix-ui/react-icons";
 
 import { Button } from "@/components/ui/button";
-import RedirectComponent from "@/components/redirect-component";
 import LoadingComponent from "@/components/loading-component";
 
 const LoginPage = () => {
@@ -18,10 +17,6 @@ const LoginPage = () => {
         <LoadingComponent />
       </div>
     );
-  }
-
-  if (status === "authenticated") {
-    return <RedirectComponent to="/home" />;
   }
 
   return (
@@ -66,9 +61,7 @@ const SocialMediaLogin = () => {
 
   const login = (providerId: string) => {
     setIsLoading(true);
-    void signIn(providerId, {
-      callbackUrl: "/home",
-    });
+    void signIn(providerId);
     setIsLoading(false);
   };
 
