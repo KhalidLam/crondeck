@@ -113,8 +113,8 @@ const SocialMediaLogin = () => {
       <Button
         variant="outline"
         type="button"
-        disabled={true}
-        onClick={() => login("linkedin")}
+        disabled={false}
+        onClick={() => void signIn("linkedin")}
       >
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/8/81/LinkedIn_icon.svg"

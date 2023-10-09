@@ -29,10 +29,11 @@ declare module "next-auth" {
     };
   }
 
-  // interface User {
-  //   // ...other properties
-  //   // role: UserRole;
-  // }
+  interface User {
+    id: string;
+    //   // ...other properties
+    //   // role: UserRole;
+  }
 }
 
 /**
@@ -111,6 +112,28 @@ export const authOptions: NextAuthOptions = {
         params: {
           scope: "openid profile email",
         },
+      },
+      issuer: "https://www.linkedin.com",
+      jwks_endpoint: "https://www.linkedin.com/oauth/openid/jwks",
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      profile(
+        profile: {
+          sub: string;
+          name: string;
+          email: string;
+          picture: string;
+        },
+        _,
+      ) {
+        const defaultImage =
+          "https://cdn-icons-png.flaticon.com/512/174/174857.png";
+        return {
+          id: profile.sub,
+          name: profile.name,
+          email: profile.email,
+          image: profile.picture ?? defaultImage,
+        };
       },
     }),
   ],
