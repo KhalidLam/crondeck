@@ -43,14 +43,15 @@ declare module "next-auth" {
  */
 export const authOptions: NextAuthOptions = {
   callbacks: {
-    session: ({ session, user }) => ({
+    session: ({ session, token }) => ({
       ...session,
       user: {
         ...session.user,
-        id: user.id,
+        id: token.sub,
       },
     }),
   },
+  session: { strategy: "jwt" },
   adapter: PrismaAdapter(db),
   providers: [
     /**
@@ -144,17 +145,6 @@ export const authOptions: NextAuthOptions = {
     // error: '/auth/error', // Error code passed in query string as ?error=
     // newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
   },
-  // events: {
-  //   createUser(message) {
-  //     const params = {
-  //       user: {
-  //         name: message.user.name,
-  //         email: message.user.email,
-  //       },
-  //     };
-  //     // await sendWelcomeEmail(params);
-  //   },
-  // },
 };
 
 /**
