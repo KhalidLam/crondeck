@@ -1,5 +1,5 @@
-import LayoutFooter from "./footer";
 import LayoutHeader from "./header";
+import LayoutFooter from "./footer";
 
 interface MainLayoutI {
   children: React.ReactNode;

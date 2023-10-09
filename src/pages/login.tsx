@@ -1,9 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
-import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { signIn, useSession } from "next-auth/react";
-import { ReloadIcon } from "@radix-ui/react-icons";
 
 import { Button } from "@/components/ui/button";
 import LoadingComponent from "@/components/loading-component";
@@ -57,44 +55,26 @@ const LoginPage = () => {
 export default LoginPage;
 
 const SocialMediaLogin = () => {
-  const [isLoading, setIsLoading] = useState(false);
-
-  const login = (providerId: string) => {
-    setIsLoading(true);
-    void signIn(providerId);
-    setIsLoading(false);
-  };
-
   return (
     <div className="grid gap-3">
       <Button
         variant="outline"
         type="button"
         disabled={false}
-        onClick={() => {
-          login("facebook");
-        }}
+        onClick={() => void signIn("facebook")}
       >
-        {isLoading ? (
-          <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-        ) : (
-          <>
-            <img
-              src="https://upload.wikimedia.org/wikipedia/en/0/04/Facebook_f_logo_%282021%29.svg"
-              className="mr-2 h-4 w-4"
-              alt="Facebook logo"
-            />
-            Facebook
-          </>
-        )}{" "}
+        <img
+          src="https://upload.wikimedia.org/wikipedia/en/0/04/Facebook_f_logo_%282021%29.svg"
+          className="mr-2 h-4 w-4"
+          alt="Facebook logo"
+        />
+        Facebook
       </Button>
       <Button
         variant="outline"
         type="button"
         disabled={true}
-        onClick={() => {
-          login("instagram");
-        }}
+        onClick={() => void signIn("instagram")}
       >
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/9/95/Instagram_logo_2022.svg"
@@ -106,7 +86,7 @@ const SocialMediaLogin = () => {
       <Button
         variant="outline"
         type="button"
-        disabled={false}
+        disabled={true}
         onClick={() => void signIn("linkedin")}
       >
         <img
