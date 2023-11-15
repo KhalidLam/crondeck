@@ -1,5 +1,5 @@
-import LayoutHeader from "./header";
-import LayoutFooter from "./footer";
+import { inter } from "@/components/ui/fonts";
+import SideNav from "./sidenav";
 
 interface MainLayoutI {
   children: React.ReactNode;
@@ -7,10 +7,13 @@ interface MainLayoutI {
 
 export default function MainLayout({ children }: MainLayoutI) {
   return (
-    <div className="flex min-h-screen flex-col bg-gray-50">
-      <LayoutHeader />
-      <main className="mt-8 max-w-7xl flex-1 px-4 md:px-6">{children}</main>
-      <LayoutFooter />
+    <div
+      className={`${inter.className} flex h-screen flex-col antialiased md:flex-row md:overflow-hidden`}
+    >
+      <div className="w-full flex-none border-b md:w-64 md:border-b-0 md:border-r">
+        <SideNav />
+      </div>
+      <div className="flex-grow bg-slate-50">{children}</div>
     </div>
   );
 }

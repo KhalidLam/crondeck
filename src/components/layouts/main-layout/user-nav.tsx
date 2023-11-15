@@ -1,7 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { signOut, useSession } from "next-auth/react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -12,50 +9,29 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-export default function LayoutHeader() {
-  const { data: sessionData } = useSession();
-  const userData = sessionData?.user ?? null;
-
-  return (
-    <header className="flex max-w-7xl items-center border-b px-4 py-4 md:px-6">
-      <Image src="/crondeck_logo.svg" height={24} width={140} alt="logo" />
-
-      <div className="ml-auto flex items-center">
-        <UserDropDownMenu
-          imgUrl={userData?.image}
-          name={userData?.name}
-          email={userData?.email}
-          onSingOut={() => void signOut()}
-        />
-      </div>
-    </header>
-  );
-}
-
-type UserDropDownMenuT = {
+type UserNavT = {
   imgUrl: string | null | undefined;
   name: string | null | undefined;
   email: string | null | undefined;
   onSingOut: () => unknown;
 };
 
-const UserDropDownMenu = ({
-  imgUrl,
-  name,
-  email,
-  onSingOut,
-}: UserDropDownMenuT) => {
+export default function UserNav({ imgUrl, name, email, onSingOut }: UserNavT) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-          <Avatar className="h-8 w-8">
+        <div className="flex cursor-pointer items-center rounded-md px-2 py-1 hover:bg-slate-50">
+          <Avatar className="h-9 w-9">
             <AvatarImage src={imgUrl ?? ""} alt="profile picture" />
-            <AvatarFallback>NF</AvatarFallback>
+            <AvatarFallback>KL</AvatarFallback>
           </Avatar>
-        </Button>
+          <div className="hidden md:ml-1 md:flex md:flex-col">
+            <span className="font-semibold tracking-tight">{name}</span>
+            <span className="text-sm text-slate-600">{email}</span>
+          </div>
+        </div>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-60" align="end" forceMount>
+      <DropdownMenuContent className="w-60" align="start" forceMount>
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
             <p className="text-sm font-medium leading-none">{name}</p>
@@ -75,4 +51,4 @@ const UserDropDownMenu = ({
       </DropdownMenuContent>
     </DropdownMenu>
   );
-};
+}
